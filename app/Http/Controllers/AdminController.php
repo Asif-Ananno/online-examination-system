@@ -7,6 +7,9 @@ use App\Models\Subject;
 use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Answer;
+//admin-edit-delete
+use App\Models\QnaExam;
+//main
 
 class AdminController extends Controller
 {
@@ -75,8 +78,11 @@ public function deleteSubject(Request $request){
     };
  }
  public function qnaDashboard(){
-
+//dmin-edit-delete
+   $questions = Question::with('answers')->get();
+    return view('admin.qnaDashboard',compact('questions'));
     return view('admin.qnaDashboard');
+//main
  }
 
  //addqna
@@ -107,5 +113,56 @@ public function deleteSubject(Request $request){
 
  }
 
+//admin-edit-delete
+ // add qna in exam dashboard
+ public function getQuestions(Request $request){
+    try{
+       $questions = Question::all();
+       if(count($questions)>0){
+        $data = [];
+        $counter = 0;
+        foreach($questions as $question ){
+           $qnaExam = QnaExam::where(['exam_id'=>$request->exam_id,'question_id'=>$question->id])->get();
+           if(count($qnaExam)==0){
+            $data[$counter]['id'] = $question->id;
+            $data[$counter]['questions'] = $question->question;
+            $counter++;
+           }
+
+        }
+        return response()->json(['success'=>true,'msg'=>"Question data","data"=>$data]);
+
+       }
+       else{
+        return response()->json(['success'=>false,'msg'=>"Question not found"]);
+
+       }
+    }catch(\Exception $e){
+        return response()->json(['success'=>false,'msg'=>$e->getMessage()]);
+    };    
+
+
+ }
+ public function addQuestions(Request $request){
+    try{
+       if(isset($request->question_ids)){
+        foreach($request->question_ids as $qids){
+            QnaExam::insert([
+                'exam_id'=>$request->exam_id,
+                'question_id'=>$qids
+            ]);
+
+        }
+       }
+       return response()->json(['success'=>true,'msg'=>"Question Added successfully"]);
+    }catch(\Exception $e){
+        return response()->json(['success'=>false,'msg'=>$e->getMessage()]);
+    };
+
+
+ }
+
+
+//main
 
 }

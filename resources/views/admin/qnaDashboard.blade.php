@@ -6,7 +6,36 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addQnaModal">
  Add Q&A
 </button>
+//admin-edit-delete
+<table class="table">
+    <thead>
+        <th>#</th>
+        <th>Question</th>
+        <th>Answers</th>
+    </thead>
+        <tbody>
+            @if(count($questions)>0)
+                @foreach($questions as $question)
+                <tr>
+                   <td>{{$question -> id}}</td>
+                   <td>{{$question -> question}}</td>
+                   <td>
+                        <a href="#" class="ansButton" data-id="{{$question->id}}" data-toggle="modal" data-target="#showAnsModal">See answers</a>
+                   </td>
+                </tr>
+                
 
+                @endforeach
+            @else
+            <tr>
+                <td colspan='3'>Question and answers not found</td>
+            </tr>
+            @endif
+        </tbody>
+
+</table>
+
+//main
 
 <!-- Modal -->
 <div class="modal fade" id="addQnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -41,6 +70,43 @@
     
   </div>
 </div>
+//admin-edit-delete
+
+<!--Show answer Modal -->
+<div class="modal fade" id="showAnsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    
+                <div class="modal-content">
+                   
+                <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Show answers</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                
+                <div class="modal-body">  
+                <table class="table">
+                        <thead>
+                            <th>#</th>
+                            <th>Answer</th>
+                            <th>is correct</th>
+                        </thead>
+                        <tbody class="showAnswers">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                        <span class="error" style="color:red"></span>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+    
+  </div>
+</div>
+
+//main
 <script>
     $(document).ready(function(){
     //form submission
@@ -121,6 +187,43 @@
     $(document).on("click",".removeButton",function(){
         $(this).parent().parent().remove();
     });
+//admin-edit-delete
+
+    //show answer
+    $(".ansButton").click(function(){
+        var questions = @json($questions);
+        var qid = $(this).attr("data-id");
+        var html = '';
+
+        for(let i=0;i<questions.length;i++){
+            if(questions[i]['id']==qid){
+                var answerLength = questions[i]['answers'].length
+
+                for(let j =0; j<answerLength;j++){
+                    let is_correct = 'No';
+                    if(questions[i]['answers'][j]['is_correct']==1){
+                        is_correct = 'Yes';
+                    }
+                    html += `
+                           <tr>
+                                <td>`+(j+1)+`</td>
+                                <td>`+questions[i]['answers'][j]['answer']+`</td>
+                                <td>`+is_correct+`</td>
+                                
+                           </tr>
+                    
+                    
+                    `;
+                }
+                break;
+
+            }
+
+        }
+        $(".showAnswers").html(html);
+
+    });
+ //main
     
     });
 </script>
