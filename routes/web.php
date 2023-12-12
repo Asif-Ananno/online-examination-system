@@ -44,6 +44,19 @@ Route::group(['middleware'=>['web','checkadmin']],function(){
       //delete routes
       Route::post('/delete-subject',[AdminController::class,'deleteSubject'])->name('deleteSubject');
 
+      //exam routes
+      Route::get('/admin/exam',[AdminController::class,'examDashboard']);
+      Route::post('/add-exam',[AdminController::class,'addExam'])->name('addExam');
+
+      //question
+      Route::get('/admin/qna-ans',[AdminController::class,'qnaDashboard']);
+      Route::post('/add-qna-ans',[AdminController::class,'addQna'])->name('addQna');
+
+      //qna exam routing
+      Route::get('/get-questions',[AdminController::class,'getQuestions'])->name('getQuestions');
+      Route::post('/addQuestions',[AdminController::class,'addQuestions'])->name('addQuestions');
+
+
 
 });
 Route::group(['middleware'=>['web','checkStudent']],function(){

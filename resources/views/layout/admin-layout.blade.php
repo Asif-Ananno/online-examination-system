@@ -10,6 +10,12 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="{{asset('css/style.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{asset('js/multiselect-dropdown.js')}}"></script>
+    <style>
+      .multiselect-dropdown{
+        width:100% !important;
+      }
+    </style>
   </head>
   <body>
 		
@@ -24,7 +30,13 @@
 	  		<h1><a href="/admin/dashboard" class="logo">Admin Dashboard</a></h1>
         <ul class="list-unstyled components mb-5">
           <li class="active">
-            <a href="#"><span class="fa fa-book mr-3"></span>Subjects</a>
+            <a href="/admin/dashboard"><span class="fa fa-book mr-3"></span>Subjects</a>
+          </li>
+          <li class="active">
+            <a href="/admin/exam"><span class="fa fa-tasks mr-3"></span>Exams</a>
+          </li>
+          <li class="active">
+            <a href="/admin/qna-ans"><span class="fa fa-question-circle mr-3"></span>Q&A</a>
           </li>
           <li>
               <a href="/logout"><span class="fa fa-sign-out mr-3"></span>Logout</a>
