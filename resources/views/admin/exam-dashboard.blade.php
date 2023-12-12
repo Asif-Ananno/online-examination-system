@@ -15,8 +15,9 @@
             <th>Subject</th>
             <th>Date</th>
             <th>time</th>
+//admin-edit-delete
             <th>Add Question</th>
-            
+            //main
         </tr>
     </thead>
         <tbody>
@@ -28,9 +29,11 @@
                         <td>{{$exam->subjects[0]['subject']}}</td>
                         <td>{{$exam->date}}</td>
                         <td>{{$exam->time}} hrs</td>
+//admin-edit-delete
                         <td>
                             <a href="#" class="addQuestion" data-id="{{$exam->id}}" data-toggle="modal" data-target="#addQnaModal">Add Question</a>
                         </td>
+                        //main
                     </tr>
                 @endforeach
             @else
@@ -84,6 +87,7 @@
     
   </div>
 </div>
+//admin-edit-delete
 
 <!--Add Answer Modal -->
 <div class="modal fade" id="addQnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -121,6 +125,8 @@
     
   </div>
 </div>
+//
+//main
 <script>
     $(document).ready(function(){
         $("#addExam").submit(function(e){
@@ -143,6 +149,7 @@
                 }
             });
         });
+//admin-edit-delete
 
         //assigning question
         $(".addQuestion").click(function(){
@@ -240,4 +247,7 @@
     }
     
 </script>
+    });
+</script>
+//main
 @endsection

@@ -52,10 +52,12 @@ Route::group(['middleware'=>['web','checkadmin']],function(){
       Route::get('/admin/qna-ans',[AdminController::class,'qnaDashboard']);
       Route::post('/add-qna-ans',[AdminController::class,'addQna'])->name('addQna');
 
+//admin-edit-delete
       //qna exam routing
       Route::get('/get-questions',[AdminController::class,'getQuestions'])->name('getQuestions');
       Route::post('/addQuestions',[AdminController::class,'addQuestions'])->name('addQuestions');
 
+//main
 
 
 });

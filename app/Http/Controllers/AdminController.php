@@ -7,7 +7,9 @@ use App\Models\Subject;
 use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Answer;
+//admin-edit-delete
 use App\Models\QnaExam;
+//main
 
 class AdminController extends Controller
 {
@@ -76,8 +78,11 @@ public function deleteSubject(Request $request){
     };
  }
  public function qnaDashboard(){
+//dmin-edit-delete
    $questions = Question::with('answers')->get();
     return view('admin.qnaDashboard',compact('questions'));
+    return view('admin.qnaDashboard');
+//main
  }
 
  //addqna
@@ -108,6 +113,7 @@ public function deleteSubject(Request $request){
 
  }
 
+//admin-edit-delete
  // add qna in exam dashboard
  public function getQuestions(Request $request){
     try{
@@ -157,5 +163,6 @@ public function deleteSubject(Request $request){
  }
 
 
+//main
 
 }

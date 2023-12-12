@@ -12,9 +12,11 @@ class Question extends Model
         'question'
         
         ];
+//admin-edit-delete
 
     public function answers(){
         return $this->hasMany(Answer::class,'question_id','id');
 
     }
+main
 }

@@ -6,6 +6,7 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addQnaModal">
  Add Q&A
 </button>
+//admin-edit-delete
 <table class="table">
     <thead>
         <th>#</th>
@@ -33,6 +34,8 @@
         </tbody>
 
 </table>
+
+//main
 
 <!-- Modal -->
 <div class="modal fade" id="addQnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -67,6 +70,7 @@
     
   </div>
 </div>
+//admin-edit-delete
 
 <!--Show answer Modal -->
 <div class="modal fade" id="showAnsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -101,6 +105,8 @@
     
   </div>
 </div>
+
+//main
 <script>
     $(document).ready(function(){
     //form submission
@@ -181,6 +187,7 @@
     $(document).on("click",".removeButton",function(){
         $(this).parent().parent().remove();
     });
+//admin-edit-delete
 
     //show answer
     $(".ansButton").click(function(){
@@ -216,6 +223,7 @@
         $(".showAnswers").html(html);
 
     });
+ //main
     
     });
 </script>
